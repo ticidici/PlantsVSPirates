@@ -63,4 +63,10 @@ public class FlowerController : MonoBehaviour {
         enemy.SetActive(true);
         enemy.SendMessage("activate");
     }
+
+    public void deactivateEnemy()
+    {
+        GameObject enemy = GameObject.Find("Enemy" + id);
+        enemy.SendMessage("deactivate");
+    }
 }

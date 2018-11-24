@@ -5,11 +5,20 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject scoreManager;
+    public const int MAX_ENEMIES = 10;
+    private const float LEVEL_1_APPEAR_ENEMY_TIME = 5;
+    private const float LEVEL_2_APPEAR_ENEMY_TIME = 2;
+    private const float LEVEL_3_APPEAR_ENEMY_TIME = 1;
+    private const float LEVEL_4_APPEAR_ENEMY_TIME = 0.5F;
+
+    public float appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
+
+    public GameObject scoreManager;
 	public Camera m_Camera;
 	public float cooldown = 1;
 
 	private float timestamp_cooldown;
+	private float timer_activate_enemy = 0;
 
     private List<FlowerController> flowers;
     private List<int> inactiveFlowers = new List<int>();
@@ -47,12 +56,24 @@ public class GameManager : MonoBehaviour {
                 }
             }
         }
+        if (timer_activate_enemy >= appear_enemy_time)
+        {
+            timer_activate_enemy = 0;
+            activateEnemy();
+        }
+        else
+        {
+            timer_activate_enemy = Time.deltaTime;
+        }
 	}
 
     void activateEnemy()
     {
-        int aux = Random.Range(0, activeFlowers.Count);
-        int flower_id = activeFlowers[aux];
-        flowers[flower_id].activateEnemy();
+        if (activeFlowers.Count > 0)
+        {
+            int aux = Random.Range(0, activeFlowers.Count);
+            int flower_id = activeFlowers[aux];
+            flowers[flower_id].activateEnemy();
+        }
     }
 }
