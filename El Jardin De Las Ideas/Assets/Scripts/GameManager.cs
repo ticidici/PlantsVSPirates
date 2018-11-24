@@ -12,12 +12,19 @@ public class GameManager : MonoBehaviour {
 	private float timestamp_cooldown;
 
     private List<FlowerController> flowers;
-    //dos vectores más con las activas e inactivas, con su id, que es la posición como han quedado en la lista
+    private List<int> inactiveFlowers = new List<int>();
+    private List<int> activeFlowers = new List<int>();
 	
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
         Debug.Log("found flowers: " + flowers.Count);
+        for(int i = 0; i < flowers.Count; i++) {
+            flowers[i].SetId(i);
+            inactiveFlowers.Add(i);
+        }
+        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        Debug.Log("active flowers: " + activeFlowers.Count);
     }
 	
 	void Start() {

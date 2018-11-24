@@ -8,7 +8,10 @@ public class FlowerController : MonoBehaviour {
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+
     private int health;
+    private int id = -1;
+
 
     void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -46,5 +49,11 @@ public class FlowerController : MonoBehaviour {
 
     public void ResetFlower() {
         animator.SetTrigger("reset");
+    }
+
+    public void SetId(int assignedId) {
+        id = assignedId;
+        Debug.Log(gameObject.name +": My Id is " + id);
+
     }
 }
