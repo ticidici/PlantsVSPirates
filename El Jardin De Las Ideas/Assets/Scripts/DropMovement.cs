@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovimientoGota : MonoBehaviour {
+public class DropMovement : MonoBehaviour {
 
     private float velocity = 0f;
 

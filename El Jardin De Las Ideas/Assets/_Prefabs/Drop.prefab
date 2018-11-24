@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114105484763253748}
   - component: {fileID: 114556193509239608}
   m_Layer: 5
-  m_Name: Gota
+  m_Name: Drop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -6,7 +6,7 @@ public class InputManager : MonoBehaviour
 {
     private string buffer = string.Empty;
     public bool isRecording = false;
-    public Nube cloudManager;
+    public CloudManager cloudManager;
 
     void Update() {
         if (!string.IsNullOrEmpty(Input.inputString)) {

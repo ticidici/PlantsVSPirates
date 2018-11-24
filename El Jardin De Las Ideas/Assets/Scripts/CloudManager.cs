@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Nube : MonoBehaviour
+public class CloudManager : MonoBehaviour
 {
     public Text dropPrefab;
     private RectTransform rt;
@@ -37,6 +37,7 @@ public class Nube : MonoBehaviour
                 item.color = Color.red;
                 if (item.text.Length == s.Length) {
                     CompletedWords++;
+                    // TODO Hacer algo cuando lleguemos a 4 palabras completadas
                 }
             }
             else {
