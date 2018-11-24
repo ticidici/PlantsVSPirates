@@ -33,13 +33,14 @@ public class CloudManager : MonoBehaviour
         List<Text> aux = new List<Text>();
 
         // Pillar todos los textos con la misma longitud
-        foreach (var item in drops) {
+        foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca
             if (item.text.StartsWith(s)) {
                 item.color = Color.red;
                 aux.Add(item);
                 if (item.text.Length == s.Length) {
                     CompletedWords++;
                     SetAllDropsBlack();
+                    Destroy(item.gameObject);
                     InputManager.instance.EmptyBuffer();
                     if(CompletedWords == 1) {
                         Debug.Log("Bu");
