@@ -8,11 +8,6 @@ public class EnemyLogic : MonoBehaviour {
 	private bool active = false;
 	private float timer = 0f;
 	public float timeAttack = 2f;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
@@ -37,4 +32,7 @@ public class EnemyLogic : MonoBehaviour {
         active = true;
     }
 
+    public void setFlower(string flower_name) {
+        flower = GameObject.Find(flower_name);
+    }
 }

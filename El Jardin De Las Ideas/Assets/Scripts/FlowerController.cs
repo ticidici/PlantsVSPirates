@@ -10,12 +10,20 @@ public class FlowerController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private GameManager gameManager;
 
+    private GameObject my_enemy;
+
     private int health;
     private int id = -1;
     private bool enemy_activated = false;
 
     public const float TIME_PUNTUATE = 3f;
     private float timer_puntuation = 0f; 
+
+    void Start() {
+        my_enemy = GameObject.Find("Enemy" + id);
+        my_enemy.SendMessage("setFlower", gameObject.name);
+        my_enemy.SendMessage("deactivate");
+    }
 
     void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -83,19 +91,18 @@ public class FlowerController : MonoBehaviour {
 
     public void activateEnemy()
     {
-        GameObject enemy = GameObject.Find("Enemy" + id);
-        if (enemy != null) {
+        
+        if (my_enemy != null) {
             enemy_activated = true;
-            enemy.SetActive(true);
-            enemy.SendMessage("activate");
+            my_enemy.SetActive(true);
+            my_enemy.SendMessage("activate");
         }
     }
 
     public void deactivateEnemy()
     {
-        GameObject enemy = GameObject.Find("Enemy" + id);
-        if (enemy != null)
-            enemy.SendMessage("deactivate");
+        if (my_enemy != null)
+            my_enemy.SendMessage("deactivate");
     }
 
     public bool hasEnemy() {
