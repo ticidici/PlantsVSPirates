@@ -8,6 +8,7 @@ public class FlowerController : MonoBehaviour {
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private GameManager gameManager;
 
     private int health;
     private int id = -1;
@@ -17,6 +18,8 @@ public class FlowerController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer) spriteRenderer.enabled = false;
         animator = GetComponent<Animator>();
+        gameManager = FindObjectOfType<GameManager>();
+
         health = MAX_HEALTH;
     }
 
@@ -37,10 +40,12 @@ public class FlowerController : MonoBehaviour {
 
     public void makeVulnerable() {
         //avisar a game manager
+        gameManager.ActivateFlower(id);
     }
 
     public void makeInvulnerable() {
         //avisar a game manager
+        gameManager.DeactivateFlower(id);
     }
 
     public void StartGrowing() {
@@ -54,7 +59,6 @@ public class FlowerController : MonoBehaviour {
     public void SetId(int assignedId) {
         id = assignedId;
         Debug.Log(gameObject.name +": My Id is " + id);
-
     }
 
     public void activateEnemy()
