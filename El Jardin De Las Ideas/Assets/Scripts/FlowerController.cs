@@ -12,6 +12,7 @@ public class FlowerController : MonoBehaviour {
 
     private int health;
     private int id = -1;
+    private bool enemy_activated = false;
 
     public const float TIME_PUNTUATE = 3f;
     private float timer_puntuation = 0f; 
@@ -84,6 +85,7 @@ public class FlowerController : MonoBehaviour {
     {
         GameObject enemy = GameObject.Find("Enemy" + id);
         if (enemy != null) {
+            enemy_activated = true;
             enemy.SetActive(true);
             enemy.SendMessage("activate");
         }
@@ -94,5 +96,9 @@ public class FlowerController : MonoBehaviour {
         GameObject enemy = GameObject.Find("Enemy" + id);
         if (enemy != null)
             enemy.SendMessage("deactivate");
+    }
+
+    public bool hasEnemy() {
+        return enemy_activated;
     }
 }

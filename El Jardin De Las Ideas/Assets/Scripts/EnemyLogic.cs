@@ -35,7 +35,6 @@ public class EnemyLogic : MonoBehaviour {
     public void activate()
     {
         active = true;
-        Debug.Log("JONAS");
     }
 
 }
