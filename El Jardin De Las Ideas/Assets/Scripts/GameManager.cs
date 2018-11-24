@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour {
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
                 	hit.transform.gameObject.deactivate();
-                	hit.transform.gameObject.SetActive(false);
                 	scoreManager.SendMessage("addScore", 10);
                 }
                 else {
