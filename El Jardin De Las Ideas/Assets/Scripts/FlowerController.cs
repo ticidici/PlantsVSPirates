@@ -7,9 +7,12 @@ public class FlowerController : MonoBehaviour {
     public const int MAX_HEALTH = 100;
 
     private Animator animator;
+    private SpriteRenderer spriteRenderer;
     private int health;
 
     void Awake() {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer) spriteRenderer.enabled = false;
         animator = GetComponent<Animator>();
         health = MAX_HEALTH;
     }
