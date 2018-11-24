@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject scoreManager;
 	public Camera m_Camera;
-	public float cooldown = 1f;
+	public float cooldown = 0.4f;
 
 	private float timestamp_cooldown;
 	private float timer_activate_enemy = 0f;
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
-                    hit.transform.gameObject.SendMessage("deactivate");
+                    hit.transform.gameObject.SendMessage("hit");
                 	scoreManager.SendMessage("addScore", 10);
                 }
                 else {
