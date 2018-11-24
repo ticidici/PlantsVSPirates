@@ -6,11 +6,18 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject scoreManager;
 	public Camera m_Camera;
+	private float timestamp_cooldown;
+	public float cooldown = 1;
 	
-	// Update is called once per frame
+	void OnStart() {
+		timestamp_cooldown = Time.time;
+	}
+
 	void LateUpdate () {
-		if (Input.GetMouseButtonDown(0))
+		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time)
          {
+         	timestamp_cooldown = Time.time + cooldown;
+
             RaycastHit hit;
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
