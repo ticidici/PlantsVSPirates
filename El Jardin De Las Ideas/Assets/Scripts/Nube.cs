@@ -1,30 +1,51 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Nube : MonoBehaviour
 {
-    public GameObject dropPrefab;
+    public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
+    private List<Text> drops;
+    public int CompletedWords { get; private set; }
 
-    void Awake()
-    {
+    void Awake() {
+        drops = new List<Text>();
         rt = GetComponent<RectTransform>();
     }
 
-    void Update()
-    {
-        if (timer > Random.Range(1f,4f)) {
-            Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform.parent).GetComponent<Text>().text = Palabras.GetWords();
+    void Update() {
+        if (timer > Random.Range(1f, 4f)) {
+            Text newDrop = Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform);
+            newDrop.text = Palabras.GetWords();
+            drops.Add(newDrop);
             timer = 0f;
         }
 
         timer += Time.deltaTime;
     }
 
-    private Vector3 GetSpawnPoint()
-    {
+    public void CheckInputPlayer(string s) {
+
+        List<Text> aux = new List<Text>();
+
+        // Pillar todos los textos con la misma longitud
+        foreach (var item in drops) {
+            if (item.text.StartsWith(s)) {
+                item.color = Color.red;
+                if (item.text.Length == s.Length) {
+                    CompletedWords++;
+                }
+            }
+            else {
+                item.color = Color.black;
+            }
+        }
+    }
+
+    private Vector3 GetSpawnPoint() {
         Vector3[] corners = new Vector3[4];
         rt.GetWorldCorners(corners);
 
