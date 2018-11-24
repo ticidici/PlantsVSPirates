@@ -136,6 +136,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &56240542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 56240540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0820945b84e5bfc45bae9265f3277428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &297187024 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 20685544386285050, guid: d8ec2956c75c3d648bf0d755c3252431,
