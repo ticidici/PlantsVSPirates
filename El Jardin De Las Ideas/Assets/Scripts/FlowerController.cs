@@ -20,7 +20,7 @@ public class FlowerController : MonoBehaviour {
     private float timer_puntuation = 0f; 
 
     void Start() {
-        my_enemy = GameObject.Find("Enemy" + id);
+        my_enemy = gameObject.transform.GetChild(0).gameObject;
         my_enemy.SendMessage("setFlower", gameObject.name);
         my_enemy.SendMessage("deactivate");
     }
@@ -74,6 +74,7 @@ public class FlowerController : MonoBehaviour {
     public void makeInvulnerable() {
         //avisar a game manager
         gameManager.DeactivateFlower(id);
+        deactivateEnemy();
     }
 
     public void StartGrowing() {

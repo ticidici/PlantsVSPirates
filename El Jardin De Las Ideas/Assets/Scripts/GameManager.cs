@@ -45,6 +45,18 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown("space")) {
             GameObject go = GameObject.Find("Flower");
             go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (1)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (2)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (3)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (4)");
+            go.SendMessage("StartGrowing");
         }
 		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
