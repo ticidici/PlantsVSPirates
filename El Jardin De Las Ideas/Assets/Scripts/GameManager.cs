@@ -82,6 +82,10 @@ public class GameManager : MonoBehaviour {
             if(flowerID == id) {
                 inactiveFlowers.Remove(flowerID);
                 activeFlowers.Add(flowerID);
+                if (activeFlowers.Count > 40) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
+                else if (activeFlowers.Count > 20) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
+                else if (activeFlowers.Count > 8) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
+                else appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
             }
         }
         //TODO comprobar si ya están todas activas
@@ -91,6 +95,10 @@ public class GameManager : MonoBehaviour {
         foreach(int flowerID in activeFlowers) {
             activeFlowers.Remove(flowerID);
             inactiveFlowers.Add(flowerID);
+            if (activeFlowers.Count > 40) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 20) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 8) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
+            else appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
         }
     }
 
