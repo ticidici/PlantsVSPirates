@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CloudManager : MonoBehaviour
 {
+    public GameManager gameManager;
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
@@ -35,14 +36,32 @@ public class CloudManager : MonoBehaviour
         foreach (var item in drops) {
             if (item.text.StartsWith(s)) {
                 item.color = Color.red;
+                aux.Add(item);
                 if (item.text.Length == s.Length) {
                     CompletedWords++;
-                    // TODO Hacer algo cuando lleguemos a 4 palabras completadas
+                    SetAllDropsBlack();
+                    InputManager.instance.EmptyBuffer();
+                    if(CompletedWords == 1) {
+                        Debug.Log("Bu");
+                        CompletedWords = 0;
+                        gameManager.makePlantAppear();
+                    }
                 }
             }
             else {
                 item.color = Color.black;
             }
+        }
+
+        // No tenemos ningun match.
+        if (aux.Count == 0) {
+            InputManager.instance.EmptyBuffer();
+        }
+    }
+
+    private void SetAllDropsBlack() {
+        foreach (var item in drops) {
+            item.color = Color.black;
         }
     }
 
