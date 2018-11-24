@@ -13,6 +13,12 @@ public class FlowerController : MonoBehaviour {
     private int health;
     private int id = -1;
 
+    [FMODUnity.EventRef]
+    public string GrowEvent;
+    [FMODUnity.EventRef]
+    public string DeathEvent;
+
+    FMOD.Studio.EventInstance Sound;
 
     void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -59,5 +65,16 @@ public class FlowerController : MonoBehaviour {
     public void SetId(int assignedId) {
         id = assignedId;
         Debug.Log(gameObject.name +": My Id is " + id);
+    }
+
+    public void ThrowSoundEvent(string eventName) {
+        if(eventName == "grow") {
+            eventName = GrowEvent;
+        }else if (eventName == "death"){
+            eventName = DeathEvent;
+        }
+        Sound = FMODUnity.RuntimeManager.CreateInstance(eventName);
+        Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        Sound.start();
     }
 }
