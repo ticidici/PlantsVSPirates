@@ -6,8 +6,8 @@ public class EnemyLogic : MonoBehaviour {
 
 	public GameObject flower;
 	private bool active = false;
-	private float timer = 0;
-	public float timeAttack = 2;
+	private float timer = 0f;
+	public float timeAttack = 2f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,12 +20,21 @@ public class EnemyLogic : MonoBehaviour {
 			timer += Time.deltaTime;
 			if (timer >= timeAttack) {
 				timer = 0;
-				//flower.SendMessage("dropLife");
+                float damage = Random.Range(15, 25);
+				flower.SendMessage("LowerHealth", damage);
 			}
 		}
 	}
 
-	void deactivate() {
-		active = false;
-	}
+    public void deactivate()
+    {
+        active = false;
+        gameObject.SetActive(false);
+    }
+
+    public void activate()
+    {
+        active = true;
+    }
+
 }

@@ -12,6 +12,7 @@ public class FlowerController : MonoBehaviour {
 
     private int health;
     private int id = -1;
+    private bool enemy_activated = false;
 
     [FMODUnity.EventRef]
     public string GrowEvent;
@@ -19,6 +20,10 @@ public class FlowerController : MonoBehaviour {
     public string DeathEvent;
 
     FMOD.Studio.EventInstance Sound;
+
+    public const float TIME_PUNTUATE = 3f;
+    private float timer_puntuation = 0f; 
+
 
     void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -32,6 +37,23 @@ public class FlowerController : MonoBehaviour {
 
     void Update() {
         animator.SetInteger("health", health);
+
+        if (health > 0) {
+            if (timer_puntuation >= TIME_PUNTUATE) {
+                timer_puntuation = 0f;
+                GameObject score_manager = GameObject.Find("ScoreManager");
+                animator = GetComponent<Animator>();
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle_healthy"))
+                    score_manager.SendMessage("addScore", 100);
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle_hurt"))
+                    score_manager.SendMessage("addScore", 80);
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("idle_almost_dead"))
+                    score_manager.SendMessage("addScore", 50);
+            }
+            else {
+                timer_puntuation += Time.deltaTime;
+            }
+        }
     }
 
     public void LowerHealth(int damage) {
@@ -77,5 +99,26 @@ public class FlowerController : MonoBehaviour {
         Sound = FMODUnity.RuntimeManager.CreateInstance(eventName);
         //Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         Sound.start();
+    }
+
+    public void activateEnemy()
+    {
+        GameObject enemy = GameObject.Find("Enemy" + id);
+        if (enemy != null) {
+            enemy_activated = true;
+            enemy.SetActive(true);
+            enemy.SendMessage("activate");
+        }
+    }
+
+    public void deactivateEnemy()
+    {
+        GameObject enemy = GameObject.Find("Enemy" + id);
+        if (enemy != null)
+            enemy.SendMessage("deactivate");
+    }
+
+    public bool hasEnemy() {
+        return enemy_activated;
     }
 }
