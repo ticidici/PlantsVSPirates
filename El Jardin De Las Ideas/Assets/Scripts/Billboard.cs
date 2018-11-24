@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class Billboard : MonoBehaviour {
 
-    public Camera m_Camera;
+    private Camera m_Camera;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        m_Camera = Camera.main;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer) spriteRenderer.enabled = false;
+    }
 
     //Orient the camera after all movement is completed this frame to avoid jittering
     void LateUpdate()
