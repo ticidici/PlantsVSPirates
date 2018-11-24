@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4896391475238018}
+  - component: {fileID: 95519785731363198}
+  - component: {fileID: 114615375847922716}
   m_Layer: 0
   m_Name: Flower
   m_TagString: Untagged
@@ -70,6 +72,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95519785731363198
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1089231475268578}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 307aaac3a107be74cb2d48637cd3a583, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114249413300984664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,7 +101,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fdc05b2eae20284687b9adf89b4a79b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 0}
+--- !u!114 &114615375847922716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1089231475268578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0820945b84e5bfc45bae9265f3277428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212780931439720624
 SpriteRenderer:
   m_ObjectHideFlags: 1
