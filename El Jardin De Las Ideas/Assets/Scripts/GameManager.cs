@@ -32,7 +32,8 @@ public class GameManager : MonoBehaviour {
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
-                	hit.transform.gameObject.deactivate();
+                	hit.transform.gameObject.SendMessage("deactivate");
+                	hit.transform.gameObject.SetActive(false);
                 	scoreManager.SendMessage("addScore", 10);
                 }
                 else {
