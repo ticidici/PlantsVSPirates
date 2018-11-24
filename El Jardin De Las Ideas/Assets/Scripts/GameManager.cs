@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject scoreManager;
 	public Camera m_Camera;
-	public float cooldown = 1f;
+	public float cooldown = 0.4f;
 
 	private float timestamp_cooldown;
 	private float timer_activate_enemy = 0f;
@@ -45,6 +45,18 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown("space")) {
             GameObject go = GameObject.Find("Flower");
             go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (1)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (2)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (3)");
+            go.SendMessage("StartGrowing");
+
+            go = GameObject.Find("Flower (4)");
+            go.SendMessage("StartGrowing");
         }
 		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
@@ -53,11 +65,11 @@ public class GameManager : MonoBehaviour {
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
-                    hit.transform.gameObject.SendMessage("deactivate");
-                	scoreManager.SendMessage("addScore", 10);
+                    hit.transform.gameObject.SendMessage("hit");
+                	scoreManager.SendMessage("addScore", 30);
                 }
                 else {
-                	scoreManager.SendMessage("susbtractScore", 10);
+                	scoreManager.SendMessage("susbtractScore", 150);
                 }
             }
         }
