@@ -27,6 +27,7 @@ public class FlowerController : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
 
         health = MAX_HEALTH;
+        StartGrowing();
     }
 
     void Update() {

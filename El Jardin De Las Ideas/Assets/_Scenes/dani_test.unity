@@ -426,16 +426,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114615375847922716, guid: 83f19cc7e9f692e49bcdd751c9b78a25,
-        type: 2}
-      propertyPath: GrowEvent
-      value: event:/flower_grow
-      objectReference: {fileID: 0}
-    - target: {fileID: 114615375847922716, guid: 83f19cc7e9f692e49bcdd751c9b78a25,
-        type: 2}
-      propertyPath: DeathEvent
-      value: event:/flower_death
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f19cc7e9f692e49bcdd751c9b78a25, type: 2}
   m_IsPrefabAsset: 0
