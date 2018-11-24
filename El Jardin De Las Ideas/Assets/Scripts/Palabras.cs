@@ -35,7 +35,7 @@ public static class Palabras
         int words = 0;
         string wordsToReturn = string.Empty;
 
-        while (words < 2 && iterator < currentPoem.Length)
+        while (words < Constants.MAX_WORDS && iterator < currentPoem.Length)
         {
             if (currentPoem[iterator] == ' ')
             {

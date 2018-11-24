@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class MovimientoGota : MonoBehaviour {
 
-    public float velocity = 0f;
+    private float velocity = 0f;
+
+    void Awake()
+    {
+        velocity = Random.Range(Constants.MIN_VELOCITY_DROP, Constants.MAX_VELOCITY_DROP); ;
+    }
 
 	// Update is called once per frame
 	void Update () {

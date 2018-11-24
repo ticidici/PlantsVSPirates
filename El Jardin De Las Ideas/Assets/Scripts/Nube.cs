@@ -6,16 +6,21 @@ public class Nube : MonoBehaviour
 {
     public GameObject dropPrefab;
     private RectTransform rt;
+    private float timer = 0f;
 
     void Awake()
     {
         rt = GetComponent<RectTransform>();
     }
 
-    // Use this for initialization
-    void Start()
+    void Update()
     {
-        Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform.parent).GetComponent<Text>().text = Palabras.GetWords();
+        if (timer > Random.Range(1f,4f)) {
+            Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform.parent).GetComponent<Text>().text = Palabras.GetWords();
+            timer = 0f;
+        }
+
+        timer += Time.deltaTime;
     }
 
     private Vector3 GetSpawnPoint()
