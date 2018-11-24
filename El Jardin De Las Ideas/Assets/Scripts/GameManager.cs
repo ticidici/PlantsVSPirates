@@ -6,19 +6,19 @@ using System.Linq;
 public class GameManager : MonoBehaviour {
 
     public const int MAX_ENEMIES = 10;
-    private const float LEVEL_1_APPEAR_ENEMY_TIME = 5;
-    private const float LEVEL_2_APPEAR_ENEMY_TIME = 2;
-    private const float LEVEL_3_APPEAR_ENEMY_TIME = 1;
-    private const float LEVEL_4_APPEAR_ENEMY_TIME = 0.5F;
+    private const float LEVEL_1_APPEAR_ENEMY_TIME = 5f;
+    private const float LEVEL_2_APPEAR_ENEMY_TIME = 2f;
+    private const float LEVEL_3_APPEAR_ENEMY_TIME = 1f;
+    private const float LEVEL_4_APPEAR_ENEMY_TIME = 0.5f;
 
     public float appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
 
     public GameObject scoreManager;
 	public Camera m_Camera;
-	public float cooldown = 1;
+	public float cooldown = 1f;
 
 	private float timestamp_cooldown;
-	private float timer_activate_enemy = 0;
+	private float timer_activate_enemy = 0f;
 
     private List<FlowerController> flowers;
     private List<int> inactiveFlowers = new List<int>();
