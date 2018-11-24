@@ -17,9 +17,10 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: 114292997875915464}
   - {fileID: 114621434519193198}
+  - {fileID: 114550800949830000}
   MasterBankRef: {fileID: 114274470337616810}
   StringsBankRef: {fileID: 114862851230820502}
-  stringsBankWriteTime: 636786809009324579
+  stringsBankWriteTime: 636786844818959835
   cacheVersion: 2
 --- !u!114 &114274470337616810
 MonoBehaviour:
@@ -34,11 +35,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: E:\Dev\Unity\PlantsVsPirates\El Jardin De Las Ideas\FMOD\jardin\Build\Desktop\Master
     Bank.bank
-  lastModified: 636786809009164698
+  lastModified: 636786844818900059
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 62432
+    Value: 2373344
   Exists: 1
 --- !u!114 &114292997875915464
 MonoBehaviour:
@@ -62,6 +63,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1159
+--- !u!114 &114550800949830000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/theme_song
+  guid: cfb6f67f43ea244cadab7351efe1da92
+  Banks:
+  - {fileID: 114274470337616810}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 184500
 --- !u!114 &114621434519193198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,9 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD\jardin\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636786809009324579
+  lastModified: 636786844818959835
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 770
+    Value: 822
   Exists: 1

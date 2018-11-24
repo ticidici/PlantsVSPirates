@@ -75,7 +75,7 @@ public class FlowerController : MonoBehaviour {
             eventName = DeathEvent;
         }
         Sound = FMODUnity.RuntimeManager.CreateInstance(eventName);
-        Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        //Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
         Sound.start();
     }
 }
