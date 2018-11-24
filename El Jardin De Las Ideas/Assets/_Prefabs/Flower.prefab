@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0820945b84e5bfc45bae9265f3277428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GrowEvent: event:/flower_grow
+  DeathEvent: event:/flower_death
 --- !u!212 &212729912892612320
 SpriteRenderer:
   m_ObjectHideFlags: 1

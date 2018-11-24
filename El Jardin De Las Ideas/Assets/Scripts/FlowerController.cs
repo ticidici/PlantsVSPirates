@@ -16,6 +16,13 @@ public class FlowerController : MonoBehaviour {
     private int id = -1;
     private bool enemy_activated = false;
 
+    [FMODUnity.EventRef]
+    public string GrowEvent;
+    [FMODUnity.EventRef]
+    public string DeathEvent;
+
+    FMOD.Studio.EventInstance Sound;
+
     public const float TIME_PUNTUATE = 3f;
     private float timer_puntuation = 0f; 
 
@@ -32,6 +39,7 @@ public class FlowerController : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
 
         health = MAX_HEALTH;
+        StartGrowing();
     }
 
     void Update() {
@@ -88,6 +96,17 @@ public class FlowerController : MonoBehaviour {
     public void SetId(int assignedId) {
         id = assignedId;
         Debug.Log(gameObject.name +": My Id is " + id);
+    }
+
+    public void ThrowSoundEvent(string eventName) {
+        if(eventName == "grow") {
+            eventName = GrowEvent;
+        }else if (eventName == "death"){
+            eventName = DeathEvent;
+        }
+        Sound = FMODUnity.RuntimeManager.CreateInstance(eventName);
+        //Sound.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+        Sound.start();
     }
 
     public void activateEnemy()
