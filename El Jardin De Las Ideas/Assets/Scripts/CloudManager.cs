@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CloudManager : MonoBehaviour
 {
+    public GameManager gameManager;
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
@@ -32,17 +33,36 @@ public class CloudManager : MonoBehaviour
         List<Text> aux = new List<Text>();
 
         // Pillar todos los textos con la misma longitud
-        foreach (var item in drops) {
+        foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca
             if (item.text.StartsWith(s)) {
                 item.color = Color.red;
+                aux.Add(item);
                 if (item.text.Length == s.Length) {
                     CompletedWords++;
-                    // TODO Hacer algo cuando lleguemos a 4 palabras completadas
+                    SetAllDropsBlack();
+                    Destroy(item.gameObject);
+                    InputManager.instance.EmptyBuffer();
+                    if(CompletedWords == 1) {
+                        Debug.Log("Bu");
+                        CompletedWords = 0;
+                        gameManager.makePlantAppear();
+                    }
                 }
             }
             else {
                 item.color = Color.black;
             }
+        }
+
+        // No tenemos ningun match.
+        if (aux.Count == 0) {
+            InputManager.instance.EmptyBuffer();
+        }
+    }
+
+    private void SetAllDropsBlack() {
+        foreach (var item in drops) {
+            item.color = Color.black;
         }
     }
 

@@ -7,6 +7,16 @@ public class InputManager : MonoBehaviour
     private string buffer = string.Empty;
     public bool isRecording = false;
     public CloudManager cloudManager;
+    public static InputManager instance = null;
+
+    public void Awake() {
+        if (instance == null) {
+            instance = this;
+        }
+        else if (instance != this) {
+            Destroy(gameObject);
+        }
+    }
 
     void Update() {
         if (!string.IsNullOrEmpty(Input.inputString)) {
