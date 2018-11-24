@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,20 +35,18 @@ public class CloudManager : MonoBehaviour
 
         // Pillar todos los textos con la misma longitud
         foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca
-            if (item.text.StartsWith(s)) {
+            if (item.text.ToLower().StartsWith(s.ToLower())) {
                 item.color = Color.red;
                 aux.Add(item);
                 if (item.text.Length == s.Length) {
                     CompletedWords++;
-                    SetAllDropsBlack();
-                    Destroy(item.gameObject);
-                    //aux.Remove(item);
-                    drops.Remove(item);
+                    StartCoroutine(DestroyAndFadeDrop(item));
                     InputManager.instance.EmptyBuffer();
-                    if(CompletedWords == 1) {
+                    if (CompletedWords == 1) {
                         CompletedWords = 0;
                         gameManager.makePlantAppear();
                     }
+                    SetAllDropsBlack();
                 }
             }
             else {
@@ -85,5 +84,17 @@ public class CloudManager : MonoBehaviour
         float y = VerticalPoint;
 
         return new Vector3(x, y, 0);
+    }
+
+    private IEnumerator DestroyAndFadeDrop(Text drop) {
+        for (float f = 1f; f >= 0; f -= 0.1f) {
+            Color c = drop.color;
+            c.a = f;
+            drop.color = c;
+            yield return null;
+        }
+
+        drops.Remove(drop);
+        Destroy(drop.gameObject);
     }
 }
