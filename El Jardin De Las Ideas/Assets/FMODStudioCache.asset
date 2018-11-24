@@ -11,9 +11,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
-  MasterBankRef: {fileID: 0}
-  StringsBankRef: {fileID: 0}
-  stringsBankWriteTime: 0
+  EditorBanks:
+  - {fileID: 114862851230820502}
+  - {fileID: 114274470337616810}
+  EditorEvents:
+  - {fileID: 114292997875915464}
+  - {fileID: 114621434519193198}
+  - {fileID: 114550800949830000}
+  MasterBankRef: {fileID: 114274470337616810}
+  StringsBankRef: {fileID: 114862851230820502}
+  stringsBankWriteTime: 636786844818959835
   cacheVersion: 2
+--- !u!114 &114274470337616810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: E:\Dev\Unity\PlantsVsPirates\El Jardin De Las Ideas\FMOD\jardin\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636786844818900059
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 2373344
+  Exists: 1
+--- !u!114 &114292997875915464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/flower_grow
+  guid: 0ffc8cca7a21c04c9c3d3d8fc1a2024a
+  Banks:
+  - {fileID: 114274470337616810}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 1159
+--- !u!114 &114550800949830000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/theme_song
+  guid: cfb6f67f43ea244cadab7351efe1da92
+  Banks:
+  - {fileID: 114274470337616810}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 184500
+--- !u!114 &114621434519193198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: event:/flower_death
+  guid: 2038d00706051e4da120459eb530aba7
+  Banks:
+  - {fileID: 114274470337616810}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 3774
+--- !u!114 &114862851230820502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: FMOD\jardin\Build\Desktop\Master Bank.strings.bank
+  lastModified: 636786844818959835
+  LoadResult: 0
+  FileSizes:
+  - Name: Desktop
+    Value: 822
+  Exists: 1
