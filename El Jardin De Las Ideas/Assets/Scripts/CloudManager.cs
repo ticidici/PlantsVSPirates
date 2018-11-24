@@ -41,9 +41,10 @@ public class CloudManager : MonoBehaviour
                     CompletedWords++;
                     SetAllDropsBlack();
                     Destroy(item.gameObject);
+                    //aux.Remove(item);
+                    drops.Remove(item);
                     InputManager.instance.EmptyBuffer();
                     if(CompletedWords == 1) {
-                        Debug.Log("Bu");
                         CompletedWords = 0;
                         gameManager.makePlantAppear();
                     }
