@@ -25,7 +25,16 @@ public class EnemyLogic : MonoBehaviour {
 		}
 	}
 
-	void deactivate() {
-		active = false;
-	}
+    public void deactivate()
+    {
+        active = false;
+        gameObject.SetActive(false);
+    }
+
+    public void activate()
+    {
+        active = true;
+        Debug.Log("JONAS");
+    }
+
 }

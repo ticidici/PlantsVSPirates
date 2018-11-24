@@ -39,8 +39,7 @@ public class GameManager : MonoBehaviour {
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
-                	hit.transform.gameObject.SendMessage("deactivate");
-                	hit.transform.gameObject.SetActive(false);
+                    hit.transform.gameObject.SendMessage("deactivate");
                 	scoreManager.SendMessage("addScore", 10);
                 }
                 else {
@@ -49,4 +48,11 @@ public class GameManager : MonoBehaviour {
             }
         }
 	}
+
+    void activateEnemy()
+    {
+        int aux = Random.Range(0, activeFlowers.Count);
+        int flower_id = activeFlowers[aux];
+        flowers[flower_id].activateEnemy();
+    }
 }
