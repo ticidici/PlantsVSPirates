@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour {
 	private float timestamp_cooldown;
 	public float cooldown = 1;
 	
-	void OnStart() {
+	void Start() {
 		timestamp_cooldown = Time.time;
 	}
 
