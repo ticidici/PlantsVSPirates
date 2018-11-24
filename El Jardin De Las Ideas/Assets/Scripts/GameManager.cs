@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour {
 		timestamp_cooldown = Time.time;
 	}
 
-	void LateUpdate () {
+    void LateUpdate () {
 		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
 
@@ -49,4 +49,28 @@ public class GameManager : MonoBehaviour {
             }
         }
 	}
+
+    public void ActivateFlower(int id) {
+        foreach (int flowerID in inactiveFlowers) {
+            if(flowerID == id) {
+                inactiveFlowers.Remove(flowerID);
+                activeFlowers.Add(flowerID);
+            }
+        }
+        //TODO comprobar si ya están todas activas
+    }
+
+    public void DeactivateFlower(int id) {
+        foreach(int flowerID in activeFlowers) {
+            activeFlowers.Remove(flowerID);
+            inactiveFlowers.Add(flowerID);
+        }
+    }
+
+    public void makePlantAppear() {
+        if(inactiveFlowers.Count > 0) {
+            int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
+            flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
+        }
+    }
 }
