@@ -14,14 +14,14 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time)
-         {
+		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
 
             RaycastHit hit;
             Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
+                	hit.transform.gameObject.deactivate();
                 	hit.transform.gameObject.SetActive(false);
                 	scoreManager.SendMessage("addScore", 10);
                 }
@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour {
                 	scoreManager.SendMessage("susbtractScore", 10);
                 }
             }
-
-         }
+        }
 	}
 }
