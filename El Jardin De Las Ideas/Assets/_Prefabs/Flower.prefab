@@ -241,6 +241,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flower: {fileID: 0}
   timeAttack: 2
+  life1: {fileID: 0}
+  life2: {fileID: 0}
+  life3: {fileID: 0}
+  life: 0
 --- !u!114 &114249413300984664
 MonoBehaviour:
   m_ObjectHideFlags: 1

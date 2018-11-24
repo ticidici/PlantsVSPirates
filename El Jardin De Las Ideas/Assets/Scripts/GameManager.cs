@@ -66,10 +66,10 @@ public class GameManager : MonoBehaviour {
 			if (Physics.Raycast(ray, out hit)) {
                 if (hit.transform.tag == "enemy" ) {
                     hit.transform.gameObject.SendMessage("hit");
-                	scoreManager.SendMessage("addScore", 10);
+                	scoreManager.SendMessage("addScore", 30);
                 }
                 else {
-                	scoreManager.SendMessage("susbtractScore", 10);
+                	scoreManager.SendMessage("susbtractScore", 150);
                 }
             }
         }
