@@ -24,4 +24,8 @@ public class EnemyLogic : MonoBehaviour {
 			}
 		}
 	}
+
+	void deactivate() {
+		active = false;
+	}
 }
