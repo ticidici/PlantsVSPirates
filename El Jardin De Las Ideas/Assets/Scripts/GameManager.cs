@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
     private List<int> inactiveFlowers;
     private List<int> activeFlowers;
 
-    public float timeLeft = 10f;
+    public float timeLeft = 180f;
     public Text timeLeftText;
     public Text gameOverText;
     public GameObject gameover_background;
