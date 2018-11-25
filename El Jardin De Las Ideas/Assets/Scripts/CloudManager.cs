@@ -6,16 +6,17 @@ using UnityEngine.UI;
 
 public class CloudManager : MonoBehaviour
 {
-    public GameManager gameManager;
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
     private List<Text> drops;
     public int CompletedWords { get; private set; }
+    private GameManager gameManager;
 
     void Awake() {
         drops = new List<Text>();
         rt = GetComponent<RectTransform>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
