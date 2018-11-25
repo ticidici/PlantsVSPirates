@@ -9,10 +9,19 @@ public class CloudManager : MonoBehaviour
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
-    private List<Text> drops;
+    public List<Text> drops;
     private float probSpawnDrop;
     public int CompletedWords { get; private set; }
     private GameManager gameManager;
+
+    [FMODUnity.EventRef]
+    public string AppearEvent;
+    [FMODUnity.EventRef]
+    public string FailedEvent;
+    [FMODUnity.EventRef]
+    public string WrittenEvent;
+
+    FMOD.Studio.EventInstance Sound;
 
     void Awake() {
         drops = new List<Text>();
@@ -24,10 +33,12 @@ public class CloudManager : MonoBehaviour
     void Update() {
         if (timer > probSpawnDrop) {
             Text newDrop = Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform);
-            newDrop.text = Palabras.GetWords();
+            newDrop.text = Palabras.GetWord();
             drops.Add(newDrop);
             timer = 0f;
             probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
+            Sound = FMODUnity.RuntimeManager.CreateInstance(AppearEvent);
+            Sound.start();
         }
 
         timer += Time.deltaTime;
@@ -36,6 +47,9 @@ public class CloudManager : MonoBehaviour
     public void CheckInputPlayer(string s) {
 
         List<Text> aux = new List<Text>();
+        drops = drops.Where(x => x != null).ToList();
+        //drops.RemoveAll(x => x.rectTransform.position.y < 0);
+        drops.Where(x => x.rectTransform.position.y < 0).ToList().ForEach(x => StartCoroutine(DestroyAndFadeDrop(x)));
 
         // Pillar todos los textos con la misma longitud
         foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca
@@ -51,6 +65,9 @@ public class CloudManager : MonoBehaviour
                         gameManager.makePlantAppear();
                     }
                     SetAllDropsBlack();
+
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(WrittenEvent);
+                    Sound.start();
                 }
             }
             else {
@@ -61,6 +78,8 @@ public class CloudManager : MonoBehaviour
         // No tenemos ningun match.
         if (aux.Count == 0) {
             InputManager.instance.EmptyBuffer();
+            Sound = FMODUnity.RuntimeManager.CreateInstance(FailedEvent);
+            Sound.start();
         }
     }
 

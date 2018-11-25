@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject scoreManager;
 	public Camera m_Camera;
-	public float cooldown = 0.4f;
+	public float cooldown = 0.1f;
 
 	private float timestamp_cooldown;
 	private float timer_activate_enemy = 0f;
@@ -23,7 +23,15 @@ public class GameManager : MonoBehaviour {
     private List<FlowerController> flowers;
     private List<int> inactiveFlowers;
     private List<int> activeFlowers;
-	
+
+    [FMODUnity.EventRef]
+    public string FailedShotEvent;
+    [FMODUnity.EventRef]
+    public string impactShotEvent;
+
+
+    FMOD.Studio.EventInstance Sound;
+
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
@@ -52,15 +60,19 @@ public class GameManager : MonoBehaviour {
                 if (hit.transform.tag == "enemy" ) {
                     hit.transform.gameObject.SendMessage("hit");
                 	scoreManager.SendMessage("addScore", 30);
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(impactShotEvent);
+                    Sound.start();
                 }
                 else {
                 	scoreManager.SendMessage("susbtractScore", 150);
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(FailedShotEvent);
+                    Sound.start();
                 }
             }
         }
         if (timer_activate_enemy >= appear_enemy_time)
         {
-            timer_activate_enemy = 0;
+            timer_activate_enemy = 0f;
             activateEnemy();
         }
         else
@@ -73,8 +85,8 @@ public class GameManager : MonoBehaviour {
     {
         if (activeFlowers.Count > 0)
         {
-
             int r_num = Random.Range(0, activeFlowers.Count);
+            int first_num = r_num;
 
             bool found = false;
             while (!found && r_num < activeFlowers.Count) {
@@ -85,17 +97,20 @@ public class GameManager : MonoBehaviour {
                     found = true;
                 }
                 else ++r_num;
+
+                if (r_num >= activeFlowers.Count) r_num = 0;
+
+                if (r_num == first_num) found = true;
             }
         }
 	}
 
     public void ActivateFlower(int id) {
-        Debug.Log("activate flower");
         bool found = false;
         foreach (int flowerID in inactiveFlowers) {
             if(flowerID == id) {
                 found = true;
-                break;
+                //break;
             }
         }
         if (found) {
@@ -115,8 +130,11 @@ public class GameManager : MonoBehaviour {
     public void DeactivateFlower(int id) {
         bool found = false;
         foreach(int flowerID in activeFlowers) {
-            found = true;
-            break;
+            if (flowerID == id)
+            {
+                found = true;
+            }
+            //break;
         }
         if (found) {
             activeFlowers.Remove(id);
@@ -129,14 +147,15 @@ public class GameManager : MonoBehaviour {
     }
 
     public void makePlantAppear() {
-        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        Debug.Log("active flowers: " + activeFlowers.Count);
+        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        //Debug.Log("active flowers: " + activeFlowers.Count);
         if (inactiveFlowers.Count > 0) {
 
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
+
             flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
             //lo quitamos del inactive pero no lo ponemos en active aún, para que no se pueda intentar volver a poner
-            inactiveFlowers.RemoveAt(newFlowerIndex);
+            //inactiveFlowers.RemoveAt(newFlowerIndex);
         }
         else {
             Debug.LogWarning("Se debería haber reseteado el jardín ya");

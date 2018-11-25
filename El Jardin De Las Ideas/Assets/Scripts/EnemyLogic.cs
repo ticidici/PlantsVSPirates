@@ -14,7 +14,17 @@ public class EnemyLogic : MonoBehaviour {
     public GameObject life3;
 
     public int life = 0;
-	
+
+    [FMODUnity.EventRef]
+    public string AppearEvent;
+    [FMODUnity.EventRef]
+    public string DisappearEvent;
+    [FMODUnity.EventRef]
+    public string HitEvent;
+
+    FMOD.Studio.EventInstance Sound;
+
+
     void Start() {
         life1 = gameObject.transform.GetChild(0).gameObject;
         life2 = gameObject.transform.GetChild(1).gameObject;
@@ -32,16 +42,28 @@ public class EnemyLogic : MonoBehaviour {
 				timer = 0;
                 float damage = Random.Range(15, 25);
 				flower.SendMessage("LowerHealth", damage);
-			}
+                //Sound = FMODUnity.RuntimeManager.CreateInstance(HitEvent);
+                //Sound.start();
+            }
 		}
 	}
 
     public void deactivate()
     {
+        flower.SendMessage("deactiveEnemy");
+
         active = false;
+        life1 = gameObject.transform.GetChild(0).gameObject;
+        life2 = gameObject.transform.GetChild(1).gameObject;
+        life3 = gameObject.transform.GetChild(2).gameObject;
+
         life1.SetActive(false);
         life2.SetActive(false);
         life3.SetActive(false);
+
+        Sound = FMODUnity.RuntimeManager.CreateInstance(DisappearEvent);
+        Sound.start();
+
         gameObject.SetActive(false);
     }
 
@@ -55,6 +77,8 @@ public class EnemyLogic : MonoBehaviour {
         if (life > 2)
             life3.SetActive(true);
 
+        Sound = FMODUnity.RuntimeManager.CreateInstance(AppearEvent);
+        Sound.start();
     }
 
     public void setFlower(string flower_name) {

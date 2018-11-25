@@ -264,6 +264,9 @@ MonoBehaviour:
   life2: {fileID: 0}
   life3: {fileID: 0}
   life: 0
+  AppearEvent: event:/enemy_appear
+  DisappearEvent: event:/enemy_disappear
+  HitEvent: event:/flower_hurt
 --- !u!114 &114249413300984664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,6 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0820945b84e5bfc45bae9265f3277428, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startActive: 0
   GrowEvent: event:/flower_grow
   DeathEvent: event:/flower_death
 --- !u!114 &114979672117945438
