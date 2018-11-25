@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{aa858ad2-e803-4f50-b942-48b0a5df338b}">
+        <property name="assetPath">
+            <value>flor_aparece.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>0.93471655328798187</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{c5d60540-5c09-4b00-8b90-504901d870ee}</destination>
+        </relationship>
+    </object>
+</objects>

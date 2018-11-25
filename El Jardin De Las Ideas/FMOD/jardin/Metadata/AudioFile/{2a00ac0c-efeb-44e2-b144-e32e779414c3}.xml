@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{2a00ac0c-efeb-44e2-b144-e32e779414c3}">
+        <property name="assetPath">
+            <value>gota_explota.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.1460544217687074</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{c5d60540-5c09-4b00-8b90-504901d870ee}</destination>
+        </relationship>
+    </object>
+</objects>
