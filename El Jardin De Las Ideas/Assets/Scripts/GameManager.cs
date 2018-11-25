@@ -23,7 +23,15 @@ public class GameManager : MonoBehaviour {
     private List<FlowerController> flowers;
     private List<int> inactiveFlowers;
     private List<int> activeFlowers;
-	
+
+    [FMODUnity.EventRef]
+    public string FailedShotEvent;
+    [FMODUnity.EventRef]
+    public string impactShotEvent;
+
+
+    FMOD.Studio.EventInstance Sound;
+
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
@@ -52,9 +60,13 @@ public class GameManager : MonoBehaviour {
                 if (hit.transform.tag == "enemy" ) {
                     hit.transform.gameObject.SendMessage("hit");
                 	scoreManager.SendMessage("addScore", 30);
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(impactShotEvent);
+                    Sound.start();
                 }
                 else {
                 	scoreManager.SendMessage("susbtractScore", 150);
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(FailedShotEvent);
+                    Sound.start();
                 }
             }
         }
@@ -90,7 +102,6 @@ public class GameManager : MonoBehaviour {
                 if (r_num >= activeFlowers.Count) r_num = 0;
 
                 if (r_num == first_num) found = true;
-                
             }
         }
 	}
@@ -144,7 +155,7 @@ public class GameManager : MonoBehaviour {
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
             flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
             //lo quitamos del inactive pero no lo ponemos en active aún, para que no se pueda intentar volver a poner
-            inactiveFlowers.RemoveAt(newFlowerIndex);
+            //inactiveFlowers.RemoveAt(newFlowerIndex);
         }
         else {
             Debug.LogWarning("Se debería haber reseteado el jardín ya");
