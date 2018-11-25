@@ -39,7 +39,7 @@ public class FlowerController : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
 
         health = MAX_HEALTH;
-        StartGrowing();
+        //StartGrowing();
     }
 
     void Update() {
@@ -111,7 +111,6 @@ public class FlowerController : MonoBehaviour {
 
     public void activateEnemy()
     {
-        
         if (my_enemy != null) {
             enemy_activated = true;
             my_enemy.SetActive(true);

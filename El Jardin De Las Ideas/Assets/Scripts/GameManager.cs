@@ -21,14 +21,16 @@ public class GameManager : MonoBehaviour {
 	private float timer_activate_enemy = 0f;
 
     private List<FlowerController> flowers;
-    private List<int> inactiveFlowers = new List<int>();
-    private List<int> activeFlowers = new List<int>();
+    private List<int> inactiveFlowers;
+    private List<int> activeFlowers;
 	
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
         Debug.Log("found flowers: " + flowers.Count);
-        for(int i = 0; i < flowers.Count; i++) {
+        inactiveFlowers = new List<int>();
+        activeFlowers = new List<int>();
+        for (int i = 0; i < flowers.Count; i++) {
             flowers[i].SetId(i);
             inactiveFlowers.Add(i);
         }
@@ -38,27 +40,12 @@ public class GameManager : MonoBehaviour {
 	
 	void Start() {
 		timestamp_cooldown = Time.time;
-	}
+    }
 
     void LateUpdate () {
-        //Debug 
-        if (Input.GetKeyDown("space")) {
-            GameObject go = GameObject.Find("Flower");
-            go.SendMessage("StartGrowing");
-
-            go = GameObject.Find("Flower (1)");
-            go.SendMessage("StartGrowing");
-
-            go = GameObject.Find("Flower (2)");
-            go.SendMessage("StartGrowing");
-
-            go = GameObject.Find("Flower (3)");
-            go.SendMessage("StartGrowing");
-
-            go = GameObject.Find("Flower (4)");
-            go.SendMessage("StartGrowing");
-        }
-		if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
+        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        //Debug.Log("active flowers: " + activeFlowers.Count);
+        if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
 
             RaycastHit hit;
@@ -82,7 +69,7 @@ public class GameManager : MonoBehaviour {
         {
             timer_activate_enemy += Time.deltaTime;
         }
-	}
+    }
 
     void activateEnemy()
     {
@@ -105,6 +92,8 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void ActivateFlower(int id) {
+        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        Debug.Log("active flowers: " + activeFlowers.Count);
         bool found = false;
         foreach (int flowerID in inactiveFlowers) {
             if(flowerID == id) {
@@ -121,6 +110,9 @@ public class GameManager : MonoBehaviour {
             else appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
         }
         //TODO comprobar si ya están todas activas
+        if(inactiveFlowers.Count < 1) {
+            Debug.Log("Todas las plantas activas!");
+        }
     }
 
     public void DeactivateFlower(int id) {
@@ -140,9 +132,15 @@ public class GameManager : MonoBehaviour {
     }
 
     public void makePlantAppear() {
-        if(inactiveFlowers.Count > 0) {
+        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        Debug.Log("active flowers: " + activeFlowers.Count);
+        if (inactiveFlowers.Count > 0) {
+            Debug.Log("appear please");
+
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
             flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
+            //lo quitamos del inactive pero no lo ponemos en active aún, para que no se pueda intentar volver a poner
+            inactiveFlowers.RemoveAt(newFlowerIndex);
         }
     }
 }
