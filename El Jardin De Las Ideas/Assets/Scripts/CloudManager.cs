@@ -46,7 +46,7 @@ public class CloudManager : MonoBehaviour
                     CompletedWords++;
                     StartCoroutine(DestroyAndFadeDrop(item));
                     InputManager.instance.EmptyBuffer();
-                    if (CompletedWords == 1) {
+                    if (CompletedWords == Constants.WORD_REQUIRED_TO_GROW_FLOWER) {
                         CompletedWords = 0;
                         gameManager.makePlantAppear();
                     }
