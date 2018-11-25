@@ -51,5 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afd032f83906c98439a3d04403c7a0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appear_enemy_time: 5
   scoreManager: {fileID: 0}
   m_Camera: {fileID: 0}
+  cooldown: 0.4
+  FailedShotEvent: event:/shot_fail
+  impactShotEvent: event:/shot_on_target

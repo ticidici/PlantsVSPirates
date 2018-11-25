@@ -14,6 +14,15 @@ public class CloudManager : MonoBehaviour
     public int CompletedWords { get; private set; }
     private GameManager gameManager;
 
+    [FMODUnity.EventRef]
+    public string AppearEvent;
+    [FMODUnity.EventRef]
+    public string FailedEvent;
+    [FMODUnity.EventRef]
+    public string WrittenEvent;
+
+    FMOD.Studio.EventInstance Sound;
+
     void Awake() {
         drops = new List<Text>();
         rt = GetComponent<RectTransform>();
@@ -28,6 +37,8 @@ public class CloudManager : MonoBehaviour
             drops.Add(newDrop);
             timer = 0f;
             probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
+            Sound = FMODUnity.RuntimeManager.CreateInstance(AppearEvent);
+            Sound.start();
         }
 
         timer += Time.deltaTime;
@@ -54,6 +65,9 @@ public class CloudManager : MonoBehaviour
                         gameManager.makePlantAppear();
                     }
                     SetAllDropsBlack();
+
+                    Sound = FMODUnity.RuntimeManager.CreateInstance(WrittenEvent);
+                    Sound.start();
                 }
             }
             else {
@@ -64,6 +78,8 @@ public class CloudManager : MonoBehaviour
         // No tenemos ningun match.
         if (aux.Count == 0) {
             InputManager.instance.EmptyBuffer();
+            Sound = FMODUnity.RuntimeManager.CreateInstance(FailedEvent);
+            Sound.start();
         }
     }
 
