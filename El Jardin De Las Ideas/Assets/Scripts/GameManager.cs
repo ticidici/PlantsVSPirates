@@ -71,7 +71,6 @@ public class GameManager : MonoBehaviour {
 
     void activateEnemy()
     {
-        Debug.Log("Activate enemy -> " + activeFlowers.Count);
         if (activeFlowers.Count > 0)
         {
             int r_num = Random.Range(0, activeFlowers.Count);
