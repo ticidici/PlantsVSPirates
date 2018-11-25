@@ -42,14 +42,7 @@ public class GameManager : MonoBehaviour {
 		timestamp_cooldown = Time.time;
     }
 
-    void Update() {
-        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        Debug.Log("active flowers: " + activeFlowers.Count);
-    }
-
     void LateUpdate () {
-        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        //Debug.Log("active flowers: " + activeFlowers.Count);
         if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
          	timestamp_cooldown = Time.time + cooldown;
 
@@ -97,8 +90,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void ActivateFlower(int id) {
-        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        Debug.Log("active flowers: " + activeFlowers.Count);
+        Debug.Log("activate flower");
         bool found = false;
         foreach (int flowerID in inactiveFlowers) {
             if(flowerID == id) {
@@ -140,12 +132,14 @@ public class GameManager : MonoBehaviour {
         Debug.Log("inactive flowers: " + inactiveFlowers.Count);
         Debug.Log("active flowers: " + activeFlowers.Count);
         if (inactiveFlowers.Count > 0) {
-            Debug.Log("appear please");
 
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
             flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
             //lo quitamos del inactive pero no lo ponemos en active aún, para que no se pueda intentar volver a poner
             inactiveFlowers.RemoveAt(newFlowerIndex);
+        }
+        else {
+            Debug.LogWarning("Se debería haber reseteado el jardín ya");
         }
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{974ba6e9-6bef-4e22-ad79-0d97f9d2d47a}">
+        <property name="assetPath">
+            <value>enemigo_desaparece.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>1.0080045351473923</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{c5d60540-5c09-4b00-8b90-504901d870ee}</destination>
+        </relationship>
+    </object>
+</objects>

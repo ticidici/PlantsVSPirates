@@ -6,18 +6,19 @@ using UnityEngine.UI;
 
 public class CloudManager : MonoBehaviour
 {
-    public GameManager gameManager;
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
     private List<Text> drops;
     private float probSpawnDrop;
     public int CompletedWords { get; private set; }
+    private GameManager gameManager;
 
     void Awake() {
         drops = new List<Text>();
         rt = GetComponent<RectTransform>();
         probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
