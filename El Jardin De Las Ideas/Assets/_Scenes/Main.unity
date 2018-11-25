@@ -678,6 +678,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114615375847922716, guid: 83f19cc7e9f692e49bcdd751c9b78a25,
+        type: 2}
+      propertyPath: startActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f19cc7e9f692e49bcdd751c9b78a25, type: 2}
   m_IsPrefabAsset: 0
@@ -769,6 +774,11 @@ Prefab:
     - target: {fileID: 1089231475268578, guid: 83f19cc7e9f692e49bcdd751c9b78a25, type: 2}
       propertyPath: m_Name
       value: FlowerA (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615375847922716, guid: 83f19cc7e9f692e49bcdd751c9b78a25,
+        type: 2}
+      propertyPath: startActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f19cc7e9f692e49bcdd751c9b78a25, type: 2}
@@ -1506,6 +1516,11 @@ Prefab:
     - target: {fileID: 4896391475238018, guid: c55373344a39cef48b7b1f08dadb9afa, type: 2}
       propertyPath: m_RootOrder
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114615375847922716, guid: c55373344a39cef48b7b1f08dadb9afa,
+        type: 2}
+      propertyPath: startActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c55373344a39cef48b7b1f08dadb9afa, type: 2}

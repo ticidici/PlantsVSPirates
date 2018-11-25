@@ -5,7 +5,7 @@ using UnityEngine;
 public class FlowerController : MonoBehaviour {
 
     public const int MAX_HEALTH = 100;
-
+    public bool startActive = false;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private GameManager gameManager;
@@ -39,7 +39,9 @@ public class FlowerController : MonoBehaviour {
         gameManager = FindObjectOfType<GameManager>();
 
         health = MAX_HEALTH;
-        //StartGrowing();
+        if (startActive) {
+            StartGrowing();
+        }
     }
 
     void Update() {

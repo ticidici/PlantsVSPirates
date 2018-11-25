@@ -10,5 +10,5 @@ public static class Constants {
     public static readonly int MAX_WORDS = 1;
     public static readonly float MAX_RANGE_TO_SPAWN_DROP = 0.5f;
     public static readonly float MIN_RANGE_TO_SPAWN_DROP = 2.5f;
-    public static readonly int WORD_REQUIRED_TO_GROW_FLOWER = 4;
+    public static readonly int WORD_REQUIRED_TO_GROW_FLOWER = 1;
 }
