@@ -6666,6 +6666,26 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 297187024}
+    - target: {fileID: 114013903197216414, guid: 7d6c8b71bac2e494b882d835c4dd18ff,
+        type: 2}
+      propertyPath: timeLeftText
+      value: 
+      objectReference: {fileID: 1727277127}
+    - target: {fileID: 114013903197216414, guid: 7d6c8b71bac2e494b882d835c4dd18ff,
+        type: 2}
+      propertyPath: gameOverText
+      value: 
+      objectReference: {fileID: 819586515}
+    - target: {fileID: 114013903197216414, guid: 7d6c8b71bac2e494b882d835c4dd18ff,
+        type: 2}
+      propertyPath: gameover_background
+      value: 
+      objectReference: {fileID: 647946219}
+    - target: {fileID: 114013903197216414, guid: 7d6c8b71bac2e494b882d835c4dd18ff,
+        type: 2}
+      propertyPath: timeLeft
+      value: 180
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d6c8b71bac2e494b882d835c4dd18ff, type: 2}
   m_IsPrefabAsset: 0
@@ -7020,7 +7040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187, y: -142.35004}
+  m_AnchoredPosition: {x: 187, y: -199.3}
   m_SizeDelta: {x: 255.6, y: 84.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1713928670
