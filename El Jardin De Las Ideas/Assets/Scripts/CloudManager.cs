@@ -9,7 +9,7 @@ public class CloudManager : MonoBehaviour
     public Text dropPrefab;
     private RectTransform rt;
     private float timer = 0f;
-    private List<Text> drops;
+    public List<Text> drops;
     private float probSpawnDrop;
     public int CompletedWords { get; private set; }
     private GameManager gameManager;
@@ -24,7 +24,7 @@ public class CloudManager : MonoBehaviour
     void Update() {
         if (timer > probSpawnDrop) {
             Text newDrop = Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform);
-            newDrop.text = Palabras.GetWords();
+            newDrop.text = Palabras.GetWord();
             drops.Add(newDrop);
             timer = 0f;
             probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
@@ -36,6 +36,9 @@ public class CloudManager : MonoBehaviour
     public void CheckInputPlayer(string s) {
 
         List<Text> aux = new List<Text>();
+        drops = drops.Where(x => x != null).ToList();
+        //drops.RemoveAll(x => x.rectTransform.position.y < 0);
+        drops.Where(x => x.rectTransform.position.y < 0).ToList().ForEach(x => StartCoroutine(DestroyAndFadeDrop(x)));
 
         // Pillar todos los textos con la misma longitud
         foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca

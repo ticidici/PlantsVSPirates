@@ -1,54 +1,28 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
-using UnityEngine;
 
 public static class Palabras
 {
-    private static string currentPoem = string.Empty;
-    private static int iterator = 0;
+    private static List<string> currentPoem = null;
 
-    // Carga un poema o lo que sea que haya de manera random.
-    // De momento solo son poemas.
     private static void LoadRandomPoem()
     {
+        currentPoem = new List<string>();
         XDocument doc = XDocument.Load(string.Concat(System.Environment.CurrentDirectory, @"\Assets\Scripts\Poemas.xml"));
         var poems = doc.Descendants("Poemas");
-        currentPoem = poems.ElementAt(Random.Range(0, Constants.MAX_POEMS)).Element("Poema").Value;
+        string currentPoemTemp = poems.ElementAt(UnityEngine.Random.Range(0, Constants.MAX_POEMS)).Element("Poema").Value;
+        var splitted = currentPoemTemp.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+        currentPoem.AddRange(splitted);
     }
 
-    // Retorna dos palabras del poema actual.
-    public static string GetWords()
+    public static string GetWord()
     {
-        if (string.IsNullOrEmpty(currentPoem) || iterator >= currentPoem.Length)
-        {
-            iterator = 0;
+        if(currentPoem == null) {
             LoadRandomPoem();
-            Debug.Log(currentPoem);
         }
 
-        return NextTwoWords();
-    }
-
-    // Usa el iterator para saber que dos palabras son las siguientes
-    private static string NextTwoWords()
-    {
-        int words = 0;
-        string wordsToReturn = string.Empty;
-
-        while (words < Constants.MAX_WORDS && iterator < currentPoem.Length)
-        {
-            if (currentPoem[iterator] == ' ')
-            {
-                words++;
-            }
-
-            wordsToReturn = string.Concat(wordsToReturn, currentPoem[iterator]);
-            iterator++;
-        }
-
-        // Eliminamos el ultimo espacio
-        wordsToReturn = wordsToReturn.Substring(0, wordsToReturn.Length - 1);
-
-        return wordsToReturn;
+        return currentPoem[UnityEngine.Random.Range(0, currentPoem.Count)];
     }
 }
