@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour {
 		timestamp_cooldown = Time.time;
     }
 
+    void Update() {
+        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        Debug.Log("active flowers: " + activeFlowers.Count);
+    }
+
     void LateUpdate () {
         //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
         //Debug.Log("active flowers: " + activeFlowers.Count);
