@@ -10,21 +10,24 @@ public class CloudManager : MonoBehaviour
     private RectTransform rt;
     private float timer = 0f;
     private List<Text> drops;
+    private float probSpawnDrop;
     public int CompletedWords { get; private set; }
     private GameManager gameManager;
 
     void Awake() {
         drops = new List<Text>();
         rt = GetComponent<RectTransform>();
+        probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
         gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
-        if (timer > Random.Range(1f, 4f)) {
+        if (timer > probSpawnDrop) {
             Text newDrop = Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform);
             newDrop.text = Palabras.GetWords();
             drops.Add(newDrop);
             timer = 0f;
+            probSpawnDrop = Random.Range(Constants.MIN_RANGE_TO_SPAWN_DROP, Constants.MAX_RANGE_TO_SPAWN_DROP);
         }
 
         timer += Time.deltaTime;
@@ -43,7 +46,7 @@ public class CloudManager : MonoBehaviour
                     CompletedWords++;
                     StartCoroutine(DestroyAndFadeDrop(item));
                     InputManager.instance.EmptyBuffer();
-                    if (CompletedWords == 1) {
+                    if (CompletedWords == Constants.WORD_REQUIRED_TO_GROW_FLOWER) {
                         CompletedWords = 0;
                         gameManager.makePlantAppear();
                     }
