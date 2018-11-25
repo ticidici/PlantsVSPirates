@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject scoreManager;
 	public Camera m_Camera;
-	public float cooldown = 0.4f;
+	public float cooldown = 0.1f;
 
 	private float timestamp_cooldown;
 	private float timer_activate_enemy = 0f;
@@ -35,15 +35,15 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
-        //Debug.Log("found flowers: " + flowers.Count);
+        Debug.Log("found flowers: " + flowers.Count);
         inactiveFlowers = new List<int>();
         activeFlowers = new List<int>();
         for (int i = 0; i < flowers.Count; i++) {
             flowers[i].SetId(i);
             inactiveFlowers.Add(i);
         }
-        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        //Debug.Log("active flowers: " + activeFlowers.Count);
+        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        Debug.Log("active flowers: " + activeFlowers.Count);
     }
 	
 	void Start() {
@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour {
 
     void activateEnemy()
     {
-        Debug.Log("Activate enemy -> " + activeFlowers.Count);
         if (activeFlowers.Count > 0)
         {
             int r_num = Random.Range(0, activeFlowers.Count);
@@ -153,6 +152,7 @@ public class GameManager : MonoBehaviour {
         if (inactiveFlowers.Count > 0) {
 
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo
+
             flowers[inactiveFlowers[newFlowerIndex]].StartGrowing();
             //lo quitamos del inactive pero no lo ponemos en active aún, para que no se pueda intentar volver a poner
             //inactiveFlowers.RemoveAt(newFlowerIndex);
