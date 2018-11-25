@@ -47,7 +47,7 @@ public class FlowerController : MonoBehaviour {
     void Update() {
         animator.SetInteger("health", health);
 
-        if (health > 0) {
+        if (health > 0 && !gameManager.getGameOver()) {
             if (timer_puntuation >= TIME_PUNTUATE) {
                 timer_puntuation = 0f;
                 GameObject score_manager = GameObject.Find("ScoreManager");
@@ -66,9 +66,13 @@ public class FlowerController : MonoBehaviour {
     }
 
     public void LowerHealth(int damage) {
-        health -= damage;
-        if (health < 1) {
-            makeInvulnerable();
+        if (!gameManager.getGameOver())
+        {
+            health -= damage;
+            if (health < 1)
+            {
+                makeInvulnerable();
+            }
         }
     }
 
@@ -89,7 +93,10 @@ public class FlowerController : MonoBehaviour {
     }
 
     public void StartGrowing() {
-        animator.SetTrigger("start_growing");
+        if (!gameManager.getGameOver())
+        {
+            animator.SetTrigger("start_growing");
+        }
     }
 
     public void ResetFlower() {
@@ -114,7 +121,7 @@ public class FlowerController : MonoBehaviour {
 
     public void activateEnemy()
     {
-        if (my_enemy != null) {
+        if (my_enemy != null && !gameManager.getGameOver()) {
             enemy_activated = true;
             my_enemy.SetActive(true);
             my_enemy.SendMessage("activate");

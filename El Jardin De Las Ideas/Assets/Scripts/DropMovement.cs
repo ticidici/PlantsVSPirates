@@ -13,6 +13,9 @@ public class DropMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        transform.position -= Vector3.up * velocity * Time.deltaTime;
+        if (!GameObject.Find("GameManager").GetComponent<GameManager>().getGameOver())
+        {
+            transform.position -= Vector3.up * velocity * Time.deltaTime;
+        }
     }
 }

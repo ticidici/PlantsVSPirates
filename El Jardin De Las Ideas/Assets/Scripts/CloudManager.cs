@@ -31,7 +31,7 @@ public class CloudManager : MonoBehaviour
     }
 
     void Update() {
-        if (timer > probSpawnDrop) {
+        if (timer > probSpawnDrop && !gameManager.getGameOver()) {
             Text newDrop = Instantiate(dropPrefab, GetSpawnPoint(), Quaternion.identity, gameObject.transform);
             newDrop.text = Palabras.GetWord();
             drops.Add(newDrop);
@@ -45,41 +45,49 @@ public class CloudManager : MonoBehaviour
     }
 
     public void CheckInputPlayer(string s) {
+        if (!gameManager.getGameOver())
+        {
+            List<Text> aux = new List<Text>();
+            drops = drops.Where(x => x != null).ToList();
+            //drops.RemoveAll(x => x.rectTransform.position.y < 0);
+            drops.Where(x => x.rectTransform.position.y < 0).ToList().ForEach(x => StartCoroutine(DestroyAndFadeDrop(x)));
 
-        List<Text> aux = new List<Text>();
-        drops = drops.Where(x => x != null).ToList();
-        //drops.RemoveAll(x => x.rectTransform.position.y < 0);
-        drops.Where(x => x.rectTransform.position.y < 0).ToList().ForEach(x => StartCoroutine(DestroyAndFadeDrop(x)));
+            // Pillar todos los textos con la misma longitud
+            foreach (var item in drops)
+            { // TODO mejorar eesta escena tarantinesca
+                if (item.text.ToLower().StartsWith(s.ToLower()))
+                {
+                    item.color = Color.red;
+                    aux.Add(item);
+                    if (item.text.Length == s.Length)
+                    {
+                        CompletedWords++;
+                        StartCoroutine(DestroyAndFadeDrop(item));
+                        InputManager.instance.EmptyBuffer();
+                        if (CompletedWords == Constants.WORD_REQUIRED_TO_GROW_FLOWER)
+                        {
+                            CompletedWords = 0;
+                            gameManager.makePlantAppear();
+                        }
+                        SetAllDropsBlack();
 
-        // Pillar todos los textos con la misma longitud
-        foreach (var item in drops) { // TODO mejorar eesta escena tarantinesca
-            if (item.text.ToLower().StartsWith(s.ToLower())) {
-                item.color = Color.red;
-                aux.Add(item);
-                if (item.text.Length == s.Length) {
-                    CompletedWords++;
-                    StartCoroutine(DestroyAndFadeDrop(item));
-                    InputManager.instance.EmptyBuffer();
-                    if (CompletedWords == Constants.WORD_REQUIRED_TO_GROW_FLOWER) {
-                        CompletedWords = 0;
-                        gameManager.makePlantAppear();
+                        Sound = FMODUnity.RuntimeManager.CreateInstance(WrittenEvent);
+                        Sound.start();
                     }
-                    SetAllDropsBlack();
-
-                    Sound = FMODUnity.RuntimeManager.CreateInstance(WrittenEvent);
-                    Sound.start();
+                }
+                else
+                {
+                    item.color = Color.black;
                 }
             }
-            else {
-                item.color = Color.black;
-            }
-        }
 
-        // No tenemos ningun match.
-        if (aux.Count == 0) {
-            InputManager.instance.EmptyBuffer();
-            Sound = FMODUnity.RuntimeManager.CreateInstance(FailedEvent);
-            Sound.start();
+            // No tenemos ningun match.
+            if (aux.Count == 0)
+            {
+                InputManager.instance.EmptyBuffer();
+                Sound = FMODUnity.RuntimeManager.CreateInstance(FailedEvent);
+                Sound.start();
+            }
         }
     }
 

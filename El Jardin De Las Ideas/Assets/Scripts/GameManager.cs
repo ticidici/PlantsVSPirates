@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Linq;
 
 public class GameManager : MonoBehaviour {
@@ -23,6 +24,12 @@ public class GameManager : MonoBehaviour {
     private List<FlowerController> flowers;
     private List<int> inactiveFlowers;
     private List<int> activeFlowers;
+
+    public float timeLeft = 10f;
+    public Text timeLeftText;
+    public Text gameOverText;
+    public GameObject gameover_background;
+    private bool game_over = false;
 
     [FMODUnity.EventRef]
     public string FailedShotEvent;
@@ -51,39 +58,55 @@ public class GameManager : MonoBehaviour {
     }
 
     void LateUpdate () {
-        if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time) {
-         	timestamp_cooldown = Time.time + cooldown;
+        if (!game_over)
+        {
+            if (Input.GetMouseButtonDown(0) && timestamp_cooldown <= Time.time)
+            {
+                timestamp_cooldown = Time.time + cooldown;
 
-            RaycastHit hit;
-            Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
-			if (Physics.Raycast(ray, out hit)) {
-                if (hit.transform.tag == "enemy" ) {
-                    hit.transform.gameObject.SendMessage("hit");
-                	scoreManager.SendMessage("addScore", 30);
-                    Sound = FMODUnity.RuntimeManager.CreateInstance(impactShotEvent);
-                    Sound.start();
-                }
-                else {
-                	scoreManager.SendMessage("susbtractScore", 150);
-                    Sound = FMODUnity.RuntimeManager.CreateInstance(FailedShotEvent);
-                    Sound.start();
+                RaycastHit hit;
+                Ray ray = m_Camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "enemy")
+                    {
+                        hit.transform.gameObject.SendMessage("hit");
+                        scoreManager.SendMessage("addScore", 30);
+                        Sound = FMODUnity.RuntimeManager.CreateInstance(impactShotEvent);
+                        Sound.start();
+                    }
+                    else
+                    {
+                        scoreManager.SendMessage("susbtractScore", 150);
+                        Sound = FMODUnity.RuntimeManager.CreateInstance(FailedShotEvent);
+                        Sound.start();
+                    }
                 }
             }
+            if (timer_activate_enemy >= appear_enemy_time)
+            {
+                timer_activate_enemy = 0f;
+                activateEnemy();
+            }
+            else
+            {
+                timer_activate_enemy += Time.deltaTime;
+            }
         }
-        if (timer_activate_enemy >= appear_enemy_time)
+        timeLeft -= Time.deltaTime;
+        if (timeLeft <= 0)
         {
-            timer_activate_enemy = 0f;
-            activateEnemy();
+            timeLeft = 0f;
+            gameOver();
+
         }
-        else
-        {
-            timer_activate_enemy += Time.deltaTime;
-        }
+        timeLeftText.text = "Time left: " + timeLeft + "s";
+
     }
 
     void activateEnemy()
     {
-        if (activeFlowers.Count > 0)
+        if (activeFlowers.Count > 0 && !game_over)
         {
             int r_num = Random.Range(0, activeFlowers.Count);
             int first_num = r_num;
@@ -116,9 +139,9 @@ public class GameManager : MonoBehaviour {
         if (found) {
             inactiveFlowers.Remove(id);
             activeFlowers.Add(id);
-            if (activeFlowers.Count > 40) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
-            else if (activeFlowers.Count > 20) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
-            else if (activeFlowers.Count > 8) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
+            if (activeFlowers.Count > 14) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 10) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 5) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
             else appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
         }
         //TODO comprobar si ya están todas activas
@@ -139,9 +162,9 @@ public class GameManager : MonoBehaviour {
         if (found) {
             activeFlowers.Remove(id);
             inactiveFlowers.Add(id);
-            if (activeFlowers.Count > 40) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
-            else if (activeFlowers.Count > 20) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
-            else if (activeFlowers.Count > 8) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
+            if (activeFlowers.Count > 14) appear_enemy_time = LEVEL_4_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 10) appear_enemy_time = LEVEL_3_APPEAR_ENEMY_TIME;
+            else if (activeFlowers.Count > 5) appear_enemy_time = LEVEL_2_APPEAR_ENEMY_TIME;
             else appear_enemy_time = LEVEL_1_APPEAR_ENEMY_TIME;
         }
     }
@@ -160,5 +183,17 @@ public class GameManager : MonoBehaviour {
         else {
             Debug.LogWarning("Se debería haber reseteado el jardín ya");
         }
+    }
+
+    public void gameOver()
+    {
+        game_over = true;
+        gameover_background.SetActive(true);
+        gameOverText.text = "Game Over\n Score: " + scoreManager.GetComponent<ScoreManager>().getScore();
+    }
+
+    public bool getGameOver()
+    {
+        return game_over;
     }
 }

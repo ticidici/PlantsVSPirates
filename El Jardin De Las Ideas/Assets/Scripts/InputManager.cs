@@ -21,7 +21,7 @@ public class InputManager : MonoBehaviour
     }
 
     void Update() {
-        if (!string.IsNullOrEmpty(Input.inputString)) {
+        if (!string.IsNullOrEmpty(Input.inputString) && !GameObject.Find("GameManager").GetComponent<GameManager>().getGameOver()) {
             foreach (char c in Input.inputString) {
                 buffer = string.Concat(buffer, c);
             }
