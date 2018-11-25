@@ -84,6 +84,7 @@ public class FlowerController : MonoBehaviour {
     public void makeInvulnerable() {
         //avisar a game manager
         gameManager.DeactivateFlower(id);
+        enemy_activated = false;
         deactivateEnemy();
     }
 
@@ -128,5 +129,10 @@ public class FlowerController : MonoBehaviour {
 
     public bool hasEnemy() {
         return enemy_activated;
+    }
+
+    public void deactiveEnemy()
+    {
+        enemy_activated = false;
     }
 }

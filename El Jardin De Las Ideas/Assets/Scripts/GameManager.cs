@@ -27,15 +27,15 @@ public class GameManager : MonoBehaviour {
     void Awake() {
         //si hubiera más de un tipo de jardín, se tendría que cargar antes
         flowers = FindObjectsOfType<FlowerController>().ToList();
-        Debug.Log("found flowers: " + flowers.Count);
+        //Debug.Log("found flowers: " + flowers.Count);
         inactiveFlowers = new List<int>();
         activeFlowers = new List<int>();
         for (int i = 0; i < flowers.Count; i++) {
             flowers[i].SetId(i);
             inactiveFlowers.Add(i);
         }
-        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        Debug.Log("active flowers: " + activeFlowers.Count);
+        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        //Debug.Log("active flowers: " + activeFlowers.Count);
     }
 	
 	void Start() {
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour {
         }
         if (timer_activate_enemy >= appear_enemy_time)
         {
-            timer_activate_enemy = 0;
+            timer_activate_enemy = 0f;
             activateEnemy();
         }
         else
@@ -71,10 +71,11 @@ public class GameManager : MonoBehaviour {
 
     void activateEnemy()
     {
+        Debug.Log("Activate enemy -> " + activeFlowers.Count);
         if (activeFlowers.Count > 0)
         {
-
             int r_num = Random.Range(0, activeFlowers.Count);
+            int first_num = r_num;
 
             bool found = false;
             while (!found && r_num < activeFlowers.Count) {
@@ -85,17 +86,21 @@ public class GameManager : MonoBehaviour {
                     found = true;
                 }
                 else ++r_num;
+
+                if (r_num >= activeFlowers.Count) r_num = 0;
+
+                if (r_num == first_num) found = true;
+                
             }
         }
 	}
 
     public void ActivateFlower(int id) {
-        Debug.Log("activate flower");
         bool found = false;
         foreach (int flowerID in inactiveFlowers) {
             if(flowerID == id) {
                 found = true;
-                break;
+                //break;
             }
         }
         if (found) {
@@ -115,8 +120,11 @@ public class GameManager : MonoBehaviour {
     public void DeactivateFlower(int id) {
         bool found = false;
         foreach(int flowerID in activeFlowers) {
-            found = true;
-            break;
+            if (flowerID == id)
+            {
+                found = true;
+            }
+            //break;
         }
         if (found) {
             activeFlowers.Remove(id);
@@ -129,8 +137,8 @@ public class GameManager : MonoBehaviour {
     }
 
     public void makePlantAppear() {
-        Debug.Log("inactive flowers: " + inactiveFlowers.Count);
-        Debug.Log("active flowers: " + activeFlowers.Count);
+        //Debug.Log("inactive flowers: " + inactiveFlowers.Count);
+        //Debug.Log("active flowers: " + activeFlowers.Count);
         if (inactiveFlowers.Count > 0) {
 
             int newFlowerIndex = Random.Range(0, inactiveFlowers.Count);//el max es exclusivo

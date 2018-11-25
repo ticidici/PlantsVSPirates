@@ -38,7 +38,13 @@ public class EnemyLogic : MonoBehaviour {
 
     public void deactivate()
     {
+        flower.SendMessage("deactiveEnemy");
+
         active = false;
+        life1 = gameObject.transform.GetChild(0).gameObject;
+        life2 = gameObject.transform.GetChild(1).gameObject;
+        life3 = gameObject.transform.GetChild(2).gameObject;
+
         life1.SetActive(false);
         life2.SetActive(false);
         life3.SetActive(false);
