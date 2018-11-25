@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 114418710905125914}
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   EditorEvents:
   - {fileID: 114570782280006716}
   - {fileID: 114407874961317400}
@@ -27,9 +27,9 @@ MonoBehaviour:
   - {fileID: 114734828228556900}
   - {fileID: 114990460419104482}
   - {fileID: 114633903826728078}
-  MasterBankRef: {fileID: 114223985280662622}
+  MasterBankRef: {fileID: 114621548414532710}
   StringsBankRef: {fileID: 114418710905125914}
-  stringsBankWriteTime: 636787657172060295
+  stringsBankWriteTime: 636787571424714330
   cacheVersion: 2
 --- !u!114 &114000355634669616
 MonoBehaviour:
@@ -67,7 +67,7 @@ MonoBehaviour:
   Path: event:/shot_fail
   guid: 8180c15f56cd9a46829d9bacbaadf54d
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -212,7 +212,7 @@ MonoBehaviour:
   Path: event:/enemy_appear
   guid: 3087c1624095a8419ecead6e64452b2c
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -234,7 +234,7 @@ MonoBehaviour:
   Path: event:/word_appear
   guid: 9dc2f2dcae7489428c4bcbad226d0647
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -256,7 +256,7 @@ MonoBehaviour:
   Path: event:/flower_death
   guid: 2038d00706051e4da120459eb530aba7
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -298,7 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Path: FMOD\jardin\Banks\Master Bank.strings.bank
-  lastModified: 636787657172060295
+  lastModified: 636787571424714330
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -362,7 +362,7 @@ MonoBehaviour:
   Path: event:/shot_on_target
   guid: 4e75d9516543634d838efa386a924468
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -384,7 +384,7 @@ MonoBehaviour:
   Path: event:/flower_grow
   guid: 0ffc8cca7a21c04c9c3d3d8fc1a2024a
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -436,6 +436,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 3774
+--- !u!114 &114621548414532710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Path: D:\MCV\PlantsVSPirates\El Jardin De Las Ideas\FMOD\jardin\Banks\Master Bank.bank
+  lastModified: 636787696760348446
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 2768576
+  Exists: 1
 --- !u!114 &114633903826728078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +468,7 @@ MonoBehaviour:
   Path: event:/fly_buzz
   guid: fd9be47f3694274e8a87032ab64babc4
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -491,7 +509,7 @@ MonoBehaviour:
   Path: event:/enemy_disappear
   guid: bc76a70046bba14e8c6983c14a0e39fd
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -576,7 +594,7 @@ MonoBehaviour:
   Path: event:/word_written
   guid: 65ce089107d15946a15d3be8f2c2db6d
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -638,7 +656,7 @@ MonoBehaviour:
   Path: event:/word_failed
   guid: b54d7d4904dcf84eaf83f6a69cbf94dd
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -660,7 +678,7 @@ MonoBehaviour:
   Path: event:/flower_hurt
   guid: b785293bb2a62e458ecbcb00ff4745e1
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -682,7 +700,7 @@ MonoBehaviour:
   Path: event:/theme_song
   guid: cfb6f67f43ea244cadab7351efe1da92
   Banks:
-  - {fileID: 114223985280662622}
+  - {fileID: 114621548414532710}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
